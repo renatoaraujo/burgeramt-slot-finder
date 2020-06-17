@@ -21,7 +21,7 @@ help: ##@other Show this help.
 	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
 
 
-setup: build startup vendor reload-permissions ## Setup application
+setup: build startup reload-permissions vendor ## Setup application
 
 build: ## Build the docker image
 	docker-compose build
@@ -39,7 +39,7 @@ vendor:	## Install PHP composer dependencies
 	docker-compose exec app composer install --no-interaction -d /app
 
 reload-permissions: ## Reload the permissions for symfony folders on Docker container
-	docker-compose exec app chmod -R 777 ms_symfony/var
+	docker-compose exec app chmod -R 777 /app/var
 
 find-anmeldung-slots: ## Execute the command to check slots available for Anmeldung
 	docker-compose exec app bin/console app:find-anmeldung-slots

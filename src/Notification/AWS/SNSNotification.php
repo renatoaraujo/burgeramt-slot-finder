@@ -6,6 +6,7 @@ namespace App\Notification\AWS;
 use App\Notification\SMSNotification;
 use Aws\Exception\AwsException;
 use Aws\Sns\SnsClient;
+use Psr\Log\LoggerInterface;
 
 final class SNSNotification implements SMSNotification
 {
@@ -13,10 +14,13 @@ final class SNSNotification implements SMSNotification
 
     private SnsClient $snsClient;
 
-    public function __construct(string $phoneNumber, SnsClient $snsClient)
+    private LoggerInterface $logger;
+
+    public function __construct(string $phoneNumber, SnsClient $snsClient, LoggerInterface $logger)
     {
         $this->phoneNumber = $phoneNumber;
         $this->snsClient = $snsClient;
+        $this->logger = $logger;
     }
 
     public function send(string $content): bool
@@ -26,9 +30,10 @@ final class SNSNotification implements SMSNotification
                 'Message' => $content,
                 'PhoneNumber' => $this->phoneNumber,
             ]);
+            $this->logger->info("SMS sent.");
             return true;
         } catch (AwsException $e) {
-            error_log($e->getMessage());
+            $this->logger->error($e->getMessage());
             return false;
         }
     }

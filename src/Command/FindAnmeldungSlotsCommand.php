@@ -34,7 +34,7 @@ class FindAnmeldungSlotsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->logger->info(
-            sprintf("Starting execution at %s", (new \DateTimeImmutable())->format('dd/mm/YYYY H:i:s'))
+            sprintf("Starting execution at %s", (new \DateTimeImmutable())->format('d/m/Y H:i:s'))
         );
 
         try {
@@ -48,7 +48,7 @@ class FindAnmeldungSlotsCommand extends Command
             $output->writeln("Nothing found, terminating...");
 
             $this->logger->info(
-                sprintf("Terminated at %s", (new \DateTimeImmutable())->format('dd/mm/YYYY H:i:s'))
+                sprintf("Terminated at %s", (new \DateTimeImmutable())->format('d/m/Y H:i:s'))
             );
             return Command::SUCCESS;
         } catch (\Exception $e) {

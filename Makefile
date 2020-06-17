@@ -1,4 +1,4 @@
-.PHONY: help build startup vendor reload-permissions shutdown destroy find-anmeldung-slots
+.PHONY: help build startup vendor reload-permissions shutdown destroy find-anmeldung-slots logs
 
 GREEN  := $(shell tput -Txterm setaf 2)
 WHITE  := $(shell tput -Txterm setaf 7)
@@ -21,7 +21,7 @@ help: ##@other Show this help.
 	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
 
 
-setup: build startup reload-permissions vendor ## Setup application
+setup: build startup vendor reload-permissions ## Setup application
 
 build: ## Build the docker image
 	docker-compose build
@@ -43,3 +43,9 @@ reload-permissions: ## Reload the permissions for symfony folders on Docker cont
 
 find-anmeldung-slots: ## Execute the command to check slots available for Anmeldung
 	docker-compose exec app bin/console app:find-anmeldung-slots
+
+dev-logs: ## See application dev logs
+	docker-compose exec app tail -f /app/var/log/dev.log
+
+prod-logs: ## See application prod logs
+	docker-compose exec app tail -f /app/var/log/prod.log

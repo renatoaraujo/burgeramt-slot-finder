@@ -42,10 +42,9 @@ class FindAnmeldungSlotsCommand extends Command
                 $message = 'Slot for Anmeldung found! Please head NOW to https://bit.ly/3fAevG4 and remember to open this page in clear/anonymous tab because of the session.';
                 $this->smsClient->send($message);
                 $output->writeln($message);
-                return Command::SUCCESS;
-            }
 
-            $output->writeln("Nothing found, terminating...");
+                $this->logger->info('Slot for Anmeldung found!');
+            }
 
             $this->logger->info(
                 sprintf("Terminated at %s", (new \DateTimeImmutable())->format('d/m/Y H:i:s'))

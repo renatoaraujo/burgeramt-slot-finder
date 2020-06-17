@@ -30,10 +30,11 @@ final class SNSNotification implements SMSNotification
                 'Message' => $content,
                 'PhoneNumber' => $this->phoneNumber,
             ]);
-            $this->logger->info("SMS sent.");
             return true;
         } catch (AwsException $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error(
+                sprintf('SMS message failed with message: %s', $e->getMessage())
+            );
             return false;
         }
     }

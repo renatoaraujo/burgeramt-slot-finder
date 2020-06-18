@@ -9,6 +9,14 @@ Create your `.env.local` from `.env.dist` with:
  - Your AWS credentials (keep in mind you will need at least AWS::AmazonSNSFullAccess policy)
  - Your email (optional for now because it is not sending email yet)
  - Your phone number (+49XXXXXX)
+  
+### It works with IFTTT
+
+If you have IFTTT and wants to blink your lights or maybe play music at your home when new spots are available,
+just create a WebHook at https://ifttt.com/maker_webhooks and change your environment variables to:
+  - IFTTT_WEBHOOK_ENABLED=1
+  - WEBHOOK_KEY=<your key>
+  - WEBHOOK_EVENT_NAME=<your event name>
 
 ### Setup the application
 ```bash

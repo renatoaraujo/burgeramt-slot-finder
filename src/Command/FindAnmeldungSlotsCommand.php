@@ -47,7 +47,7 @@ class FindAnmeldungSlotsCommand extends Command
         );
 
         try {
-            if (!$this->slotFinder->isAnySlotAvailable()) {
+            if ($this->slotFinder->isAnySlotAvailable()) {
 
                 $this->eventTrigger->trigger();
 

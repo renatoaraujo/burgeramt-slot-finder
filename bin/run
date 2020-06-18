@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Starting new execution: $(date)" >> /app/var/log/execution.log
+php /app/burgeramt-slot-finder/bin/console app:find-anmeldung-slots
+echo "Execution finished with success: $(date)" >> /app/var/log/execution.log

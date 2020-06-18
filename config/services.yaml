@@ -1,14 +1,16 @@
 parameters:
 
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        bind:
-            $fullUrl: '%env(FULL_URL)%'
-            $email: '%env(EMAIL)%'
-            $phoneNumber: '%env(PHONE_NUMBER)%'
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      $fullUrl: '%env(FULL_URL)%'
+      $email: '%env(EMAIL)%'
+      $phoneNumber: '%env(PHONE_NUMBER)%'
+      $webHookKey: '%env(WEBHOOK_KEY)%'
+      $webHookEventName: '%env(WEBHOOK_EVENT_NAME)%'
 
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'

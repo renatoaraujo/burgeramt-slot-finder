@@ -23,10 +23,6 @@ final class AnmeldungSlotFinder implements SlotFinder
         $calendar = $crawler->filter('div.calendar-month-table');
         $availableDays = $calendar->children('table td.buchbar');
 
-        if ($availableDays->count() > 0) {
-            return true;
-        }
-
-        return false;
+        return $availableDays->count() > 0;
     }
 }

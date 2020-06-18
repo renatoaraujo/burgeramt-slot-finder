@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Finder\SlotFinder;
+use App\IFTTT\WebHookEventTrigger;
 use App\Notification\SMSNotification;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -20,16 +21,24 @@ class FindAnmeldungSlotsCommand extends Command
 
     private LoggerInterface $logger;
 
-    public function __construct(SlotFinder $slotFinder, SMSNotification $smsClient, LoggerInterface $logger)
-    {
+    private WebHookEventTrigger $eventTrigger;
+
+    public function __construct(
+        SlotFinder $slotFinder,
+        SMSNotification $smsClient,
+        LoggerInterface $logger,
+        WebHookEventTrigger $eventTrigger
+    ) {
         parent::__construct('Anmeldung Slot Finder');
         $this->slotFinder = $slotFinder;
         $this->smsClient = $smsClient;
         $this->logger = $logger;
+        $this->eventTrigger = $eventTrigger;
     }
 
     protected function configure()
-    {}
+    {
+    }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -39,6 +48,11 @@ class FindAnmeldungSlotsCommand extends Command
 
         try {
             if ($this->slotFinder->isAnySlotAvailable()) {
+
+                if (getenv('IFTTT_WEBHOOK_ENABLED')) {
+                    $this->eventTrigger->trigger();
+                }
+
                 $message = 'Slot for Anmeldung found! Please head NOW to https://bit.ly/3fAevG4 and remember to open this page in clear/anonymous tab because of the session.';
                 $this->smsClient->send($message);
                 $output->writeln($message);

@@ -36,7 +36,7 @@ If you want to keep it running from a server overnight or days just use the scri
 * Run script does not use Docker, if you want to run it on Docker please change the script before execution.
 
 ```bash
-$ nohup /var/bin/run > /app/var/log/run.log 2>&1 & echo $! > /app/var/save_pid.txt
+$ nohup /app/bin/run > /app/var/log/run.log 2>&1 & echo $! > /app/var/save_pid.txt
 ``` 
 
 This application is for fun purposes and to create something that can be helpful for new comers to Berlin, if you have any new idea or wants to contribute please feel free to do so.

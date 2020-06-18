@@ -23,17 +23,21 @@ class FindAnmeldungSlotsCommand extends Command
 
     private WebHookEventTrigger $eventTrigger;
 
+    private int $waitTime;
+
     public function __construct(
         SlotFinder $slotFinder,
         SMSNotification $smsClient,
         LoggerInterface $logger,
-        WebHookEventTrigger $eventTrigger
+        WebHookEventTrigger $eventTrigger,
+        int $waitTime
     ) {
         parent::__construct('Anmeldung Slot Finder');
         $this->slotFinder = $slotFinder;
         $this->smsClient = $smsClient;
         $this->logger = $logger;
         $this->eventTrigger = $eventTrigger;
+        $this->waitTime = $waitTime;
     }
 
     protected function configure()
@@ -42,9 +46,7 @@ class FindAnmeldungSlotsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->logger->info(
-            sprintf("Starting execution at %s", (new \DateTimeImmutable())->format('d/m/Y H:i:s'))
-        );
+        $output->writeln(sprintf('[%s] Started.', (new \DateTimeImmutable())->format('d/m/Y H:i:s')));
 
         try {
             if ($this->slotFinder->isAnySlotAvailable()) {
@@ -57,14 +59,13 @@ class FindAnmeldungSlotsCommand extends Command
 
                 $this->logger->info('Slot for Anmeldung found!');
             }
-
-            $this->logger->info(
-                sprintf("Terminated at %s", (new \DateTimeImmutable())->format('d/m/Y H:i:s'))
-            );
-            return Command::SUCCESS;
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
-            return Command::FAILURE;
         }
+
+        $output->writeln(sprintf('[%s] Sleeping now, restarting in %d seconds.', (new \DateTimeImmutable())->format('d/m/Y H:i:s'), $this->waitTime));
+
+        sleep($this->waitTime);
+        $this->getApplication()->find(self::$defaultName)->run($input, $output);
     }
 }

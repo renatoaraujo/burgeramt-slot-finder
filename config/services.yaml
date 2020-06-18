@@ -11,6 +11,7 @@ services:
       $webHookKey: '%env(WEBHOOK_KEY)%'
       $webHookEventName: '%env(WEBHOOK_EVENT_NAME)%'
       $isIFTTTWebHookEnabled: '%env(IFTTT_WEBHOOK_ENABLED)%'
+      $waitTime: '%env(WAIT_TIME)%'
 
   App\:
     resource: '../src/*'

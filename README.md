@@ -20,12 +20,7 @@ $ make setup
 $ make find-anmeldung-slots
 ```
 
-The application does not keep running on your machine, if you want to, you must configure a cronjob.
-
-Ex: running every 30 minutes.
-```bash 
-*/30 * * * * make -C /path-to/burgeramt-slot-finder/ find-anmeldung-slots
-```
+The application runs the command every 5 minutes, if you want to change that just change the env variable `WAIT_TIME` to your desired time (seconds) at `.env.local`.
 
 This application is for fun purposes and to create something that can be helpful for new comers to Berlin, if you have any new idea or wants to contribute please feel free to do so.
 You can find something else (and simple) at https://gist.github.com/mugli/f538e8fb0554267c1028068b75e17c59

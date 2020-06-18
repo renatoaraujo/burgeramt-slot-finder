@@ -47,11 +47,9 @@ class FindAnmeldungSlotsCommand extends Command
         );
 
         try {
-            if ($this->slotFinder->isAnySlotAvailable()) {
+            if (!$this->slotFinder->isAnySlotAvailable()) {
 
-                if (getenv('IFTTT_WEBHOOK_ENABLED')) {
-                    $this->eventTrigger->trigger();
-                }
+                $this->eventTrigger->trigger();
 
                 $message = 'Slot for Anmeldung found! Please head NOW to https://bit.ly/3fAevG4 and remember to open this page in clear/anonymous tab because of the session.';
                 $this->smsClient->send($message);

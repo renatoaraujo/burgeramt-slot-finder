@@ -10,6 +10,7 @@ services:
       $phoneNumber: '%env(PHONE_NUMBER)%'
       $webHookKey: '%env(WEBHOOK_KEY)%'
       $webHookEventName: '%env(WEBHOOK_EVENT_NAME)%'
+      $isIFTTTWebHookEnabled: '%env(IFTTT_WEBHOOK_ENABLED)%'
 
   App\:
     resource: '../src/*'

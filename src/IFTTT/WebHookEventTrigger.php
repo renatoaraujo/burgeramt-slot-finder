@@ -9,14 +9,19 @@ final class WebHookEventTrigger
 {
     private string $webHookTriggerUri;
 
-    public function __construct(string $webHookKey, string $webHookEventName)
+    private bool $isIFTTTWebHookEnabled;
+
+    public function __construct(bool $isIFTTTWebHookEnabled, string $webHookKey, string $webHookEventName)
     {
         $this->webHookTriggerUri = sprintf("https://maker.ifttt.com/trigger/%s/with/key/%s", $webHookEventName, $webHookKey);
+        $this->isIFTTTWebHookEnabled = $isIFTTTWebHookEnabled;
     }
 
     public function trigger(): void
     {
-        $httpClient = HttpClient::create();
-        $httpClient->request("GET", $this->webHookTriggerUri);
+        if ($this->isIFTTTWebHookEnabled) {
+            $httpClient = HttpClient::create();
+            $httpClient->request("GET", $this->webHookTriggerUri);
+        }
     }
 }

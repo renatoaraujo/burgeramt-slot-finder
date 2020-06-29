@@ -6,12 +6,11 @@ services:
     autoconfigure: true
     bind:
       $fullUrl: '%env(FULL_URL)%'
-      $email: '%env(EMAIL)%'
-      $phoneNumber: '%env(PHONE_NUMBER)%'
       $webHookKey: '%env(WEBHOOK_KEY)%'
       $webHookEventName: '%env(WEBHOOK_EVENT_NAME)%'
       $isIFTTTWebHookEnabled: '%env(IFTTT_WEBHOOK_ENABLED)%'
       $waitTime: '%env(WAIT_TIME)%'
+      $topicArn: '%env(AWS_SNS_TOPIC)%'
 
   App\:
     resource: '../src/*'

@@ -7,8 +7,7 @@ The easiest way to run this application is if you have Docker installed and runn
 
 Create your `.env.local` from `.env.dist` with: 
  - Your AWS credentials (keep in mind you will need at least AWS::AmazonSNSFullAccess policy)
- - Your email (optional for now because it is not sending email yet)
- - Your phone number (+49XXXXXX)
+ - Create a topic for better management on AWS Console for SNS and add it to environment variables
   
 ### It works with IFTTT
 

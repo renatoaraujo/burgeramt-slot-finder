@@ -49,11 +49,11 @@ class FindAnmeldungSlotsCommand extends Command
         $output->writeln(sprintf('[%s] Started.', (new \DateTimeImmutable())->format('d/m/Y H:i:s')));
 
         try {
-            if ($this->slotFinder->isAnySlotAvailable()) {
+            if (!$this->slotFinder->isAnySlotAvailable()) {
 
                 $this->eventTrigger->trigger();
 
-                $message = 'Slot for Anmeldung found! Please head NOW to https://bit.ly/3fAevG4 and remember to open this page in clear/anonymous tab because of the session.';
+                $message = 'BOT: Head NOW to https://bit.ly/3fAevG4 for Anmeldung';
                 $this->smsClient->send($message);
                 $output->writeln($message);
 

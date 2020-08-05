@@ -6,8 +6,13 @@ The easiest way to run this application is if you have Docker installed and runn
 ## Configuration
 
 Create your `.env.local` from `.env.dist` with: 
- - Your AWS credentials (keep in mind you will need at least AWS::AmazonSNSFullAccess policy)
- - Create a topic for better management on AWS Console for SNS and add it to environment variables
+  - AWS_KEY=<YOUR_AWS_KEY>
+  - AWS_SECRET=<YOUR_AWS_SECRET>
+  - AWS_SNS_TOPIC=<YOUR_SNS_TOPIC>
+    - Eg: arn:aws:sns:eu-central-1:<123456678>:<TOPIC_NAME>
+
+
+:bulb: For your AWS credentials you will need at least AWS::AmazonSNSFullAccess policy
   
 ### It works with IFTTT
 

@@ -49,7 +49,7 @@ class FindAnmeldungSlotsCommand extends Command
         $output->writeln(sprintf('[%s] Started.', (new \DateTimeImmutable())->format('d/m/Y H:i:s')));
 
         try {
-            if (!$this->slotFinder->isAnySlotAvailable()) {
+            if ($this->slotFinder->isAnySlotAvailable()) {
 
                 $this->eventTrigger->trigger();
 

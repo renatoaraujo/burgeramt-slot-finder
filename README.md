@@ -19,8 +19,8 @@ Create your `.env.local` from `.env.dist` with:
 If you have IFTTT and wants to blink your lights or maybe play music at your home when new spots are available,
 just create a WebHook at https://ifttt.com/maker_webhooks and change your environment variables to:
   - IFTTT_WEBHOOK_ENABLED=1
-  - WEBHOOK_KEY=<your key>
-  - WEBHOOK_EVENT_NAME=<your event name>
+  - WEBHOOK_KEY=<YOUR_KEY>
+  - WEBHOOK_EVENT_NAME=<YOUR_EVENT_NAME>
 
 ### Setup the application
 ```bash
@@ -29,7 +29,7 @@ $ make setup
 
 ### Check if there is any Anmeldung einer Wohnung available
 ```bash
-$ make find-anmeldung-slots
+$ make run
 ```
 
 The application runs the command every 5 minutes, if you want to change that just change the env variable `WAIT_TIME` to your desired time (seconds) at `.env.local`.
